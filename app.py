@@ -50,8 +50,9 @@ movies['tags'] = movies['overview'].fillna('') + ' ' + movies['genre'].fillna(''
 new_data = movies.drop(columns=['overview', 'genre'])  
 movies_list=movies['title'].values
 
+@st.cache_data
 def load_and_process_data():
-    cv = CountVectorizer(max_features=10000, stop_words='english')
+    cv = CountVectorizer(max_features=1000, stop_words='english')
     vector = cv.fit_transform(new_data['tags'].values.astype('U')).toarray() 
     similarity = cosine_similarity(vector)   
 
